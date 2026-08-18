@@ -31,7 +31,7 @@
     "correctAnswer": "Obsidiana"
   },
   {
-    "question": "Qual destes mobs é neutro e pode negociar com o jogador?",
+    "question": "Qual destes mobs pode negociar com o jogador?",
     "options": ["Villager", "Zombie", "Creeper", "Ghast"],
     "correctAnswer": "Villager"
   },
@@ -49,5 +49,55 @@
     "question": "Qual bloco permite guardar itens?",
     "options": ["Fornalha", "Baú", "Bancada de Trabalho", "Bigorna"],
     "correctAnswer": "Baú"
+  },
+  {
+    "question": "Qual item é necessário para criar uma tocha?",
+    "options": ["Carvão", "Diamante", "Ferro", "Redstone"],
+    "correctAnswer": "Carvão"
+  },
+  {
+    "question": "Qual mob pode ser encontrado naturalmente em uma vila?",
+    "options": ["Villager", "Ghast", "Blaze", "Shulker"],
+    "correctAnswer": "Villager"
+  },
+  {
+    "question": "Qual ferramenta é usada para cortar madeira com mais eficiência?",
+    "options": ["Picareta", "Pá", "Machado", "Enxada"],
+    "correctAnswer": "Machado"
+  },
+  {
+    "question": "Qual item permite ao jogador dormir e definir seu ponto de renascimento?",
+    "options": ["Baú", "Cama", "Fornalha", "Bancada de Trabalho"],
+    "correctAnswer": "Cama"
+  },
+  {
+    "question": "Qual mob pode teleportar e carregar blocos?",
+    "options": ["Enderman", "Creeper", "Skeleton", "Spider"],
+    "correctAnswer": "Enderman"
+  },
+  {
+    "question": "Qual minério é utilizado para fabricar ferramentas e armaduras de ferro?",
+    "options": ["Carvão", "Minério de Ferro", "Redstone", "Lápis-Lazúli"],
+    "correctAnswer": "Minério de Ferro"
+  },
+  {
+    "question": "Qual estrutura contém o portal para The End?",
+    "options": ["Fortaleza do Nether", "Mansão da Floresta", "Stronghold", "Monumento Oceânico"],
+    "correctAnswer": "Stronghold"
+  },
+  {
+    "question": "Qual item é usado para ativar o portal para The End?",
+    "options": ["Olho de Ender", "Pérola do Ender", "Cristal do End", "Estrela do Nether"],
+    "correctAnswer": "Olho de Ender"
+  },
+  {
+    "question": "Qual mob hostil pode aparecer dentro de uma caverna e atirar flechas?",
+    "options": ["Skeleton", "Cow", "Pig", "Villager"],
+    "correctAnswer": "Skeleton"
+  },
+  {
+    "question": "Qual material é necessário para fabricar uma picareta de diamante?",
+    "options": ["3 diamantes e 2 gravetos", "2 diamantes e 3 gravetos", "3 ferros e 2 gravetos", "4 diamantes e 2 gravetos"],
+    "correctAnswer": "3 diamantes e 2 gravetos"
   }
 ]
