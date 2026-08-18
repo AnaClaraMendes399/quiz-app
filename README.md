@@ -1,50 +1,44 @@
-# Welcome to your Expo app 👋
+# 🎮 QuizCraft
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Um quiz interativo sobre Minecraft desenvolvido com React Native e Expo.
 
-## Get started
+O objetivo do projeto é testar os conhecimentos dos jogadores sobre o universo de Minecraft por meio de perguntas com múltiplas alternativas.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## 📱 Sobre o projeto
 
-2. Start the app
+O QuizCraft apresenta perguntas sobre Minecraft e permite que o usuário escolha uma entre quatro alternativas.
 
-   ```bash
-   npx expo start
-   ```
+Ao final do quiz, o sistema apresenta a pontuação obtida e permite iniciar o quiz novamente.
 
-In the output, you'll find options to open the app in a
+O aplicativo possui um layout responsivo, adaptando-se a diferentes tamanhos de tela, como celulares e computadores.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## ✨ Funcionalidades
 
-## Get a fresh project
+- 🎮 Quiz sobre Minecraft
+- ❓ Perguntas com múltiplas alternativas
+- ✅ Verificação automática das respostas
+- 🏆 Sistema de pontuação
+- 📊 Contador de perguntas
+- 🔄 Opção de jogar novamente
+- 📱 Interface responsiva para celular
+- 💻 Interface adaptada para computador
+- 🖼️ Imagem de fundo temática
+- 📜 Rolagem automática em telas menores
 
-When you're ready, run:
+---
 
-```bash
-npm run reset-project
-```
+## 🛠️ Tecnologias utilizadas
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+- **React Native**
+- **Expo**
+- **TypeScript**
+- **JavaScript**
+- **JSON**
+- **StyleSheet**
+- **Git/GitHub**
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+---

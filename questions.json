@@ -1,0 +1,53 @@
+[
+  {
+    "question": "Qual mob explode quando chega perto do jogador?",
+    "options": ["Zombie", "Creeper", "Skeleton", "Spider"],
+    "correctAnswer": "Creeper",
+    "img": "https://www.nicepng.com/png/full/849-8498601_minecraft-creeper-png.png"
+  },
+  {
+    "question": "Qual minério é usado para fabricar uma mesa de encantamentos?",
+    "options": ["Ferro", "Diamante", "Ouro", "Esmeralda"],
+    "correctAnswer": "Diamante"
+  },
+  {
+    "question": "Qual dimensão abriga o Ender Dragon?",
+    "options": ["Nether", "The End", "Overworld", "Deep Dark"],
+    "correctAnswer": "The End"
+  },
+  {
+    "question": "Qual ferramenta é mais indicada para minerar obsidiana?",
+    "options": ["Picareta de Pedra", "Picareta de Ferro", "Picareta de Diamante", "Machado de Diamante"],
+    "correctAnswer": "Picareta de Diamante"
+  },
+  {
+    "question": "Qual alimento pode ser obtido das vacas?",
+    "options": ["Maçã", "Leite", "Batata", "Trigo"],
+    "correctAnswer": "Leite"
+  },
+  {
+    "question": "Qual bloco é usado para criar um portal para o Nether?",
+    "options": ["Pedregulho", "Obsidiana", "Basalto", "Ardósia"],
+    "correctAnswer": "Obsidiana"
+  },
+  {
+    "question": "Qual destes mobs é neutro e pode negociar com o jogador?",
+    "options": ["Villager", "Zombie", "Creeper", "Ghast"],
+    "correctAnswer": "Villager"
+  },
+  {
+    "question": "Qual minério é mais raro no Overworld?",
+    "options": ["Carvão", "Ferro", "Esmeralda", "Ouro"],
+    "correctAnswer": "Esmeralda"
+  },
+  {
+    "question": "Qual mob aparece somente no Nether?",
+    "options": ["Enderman", "Ghast", "Creeper", "Lobo"],
+    "correctAnswer": "Ghast"
+  },
+  {
+    "question": "Qual bloco permite guardar itens?",
+    "options": ["Fornalha", "Baú", "Bancada de Trabalho", "Bigorna"],
+    "correctAnswer": "Baú"
+  }
+]
