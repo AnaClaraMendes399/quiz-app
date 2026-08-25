@@ -1,103 +1,202 @@
 [
   {
-    "question": "Qual mob explode quando chega perto do jogador?",
-    "options": ["Zombie", "Creeper", "Skeleton", "Spider"],
-    "correctAnswer": "Creeper",
-    "img": "https://www.nicepng.com/png/full/849-8498601_minecraft-creeper-png.png"
-  },
-  {
-    "question": "Qual minério é usado para fabricar uma mesa de encantamentos?",
-    "options": ["Ferro", "Diamante", "Ouro", "Esmeralda"],
+    "question": "Um jogador entra em uma caverna com uma picareta de ferro. Qual minério ele NÃO consegue obter utilizando essa picareta?",
+    "options": [
+      "Ouro",
+      "Diamante",
+      "Redstone",
+      "Lápis-lazúli"
+    ],
     "correctAnswer": "Diamante"
   },
   {
-    "question": "Qual dimensão abriga o Ender Dragon?",
-    "options": ["Nether", "The End", "Overworld", "Deep Dark"],
-    "correctAnswer": "The End"
+    "question": "Qual é a principal função do Olho de Ender durante a preparação para enfrentar o Ender Dragon?",
+    "options": [
+      "Encontrar uma Fortaleza do Nether",
+      "Encontrar uma Stronghold",
+      "Ativar diretamente o portal do Nether",
+      "Criar uma poção de força"
+    ],
+    "correctAnswer": "Encontrar uma Stronghold"
   },
   {
-    "question": "Qual ferramenta é mais indicada para minerar obsidiana?",
-    "options": ["Picareta de Pedra", "Picareta de Ferro", "Picareta de Diamante", "Machado de Diamante"],
-    "correctAnswer": "Picareta de Diamante"
+    "question": "Um jogador possui 3 diamantes e 2 gravetos. Qual destes itens ele consegue fabricar com esses materiais?",
+    "options": [
+      "Espada de diamante",
+      "Picareta de diamante",
+      "Machado de diamante",
+      "Pá de diamante"
+    ],
+    "correctAnswer": "Picareta de diamante"
   },
   {
-    "question": "Qual alimento pode ser obtido das vacas?",
-    "options": ["Maçã", "Leite", "Batata", "Trigo"],
-    "correctAnswer": "Leite"
-  },
-  {
-    "question": "Qual bloco é usado para criar um portal para o Nether?",
-    "options": ["Pedregulho", "Obsidiana", "Basalto", "Ardósia"],
-    "correctAnswer": "Obsidiana"
-  },
-  {
-    "question": "Qual destes mobs pode negociar com o jogador?",
-    "options": ["Villager", "Zombie", "Creeper", "Ghast"],
-    "correctAnswer": "Villager"
-  },
-  {
-    "question": "Qual minério é mais raro no Overworld?",
-    "options": ["Carvão", "Ferro", "Esmeralda", "Ouro"],
-    "correctAnswer": "Esmeralda"
-  },
-  {
-    "question": "Qual mob aparece somente no Nether?",
-    "options": ["Enderman", "Ghast", "Creeper", "Lobo"],
-    "correctAnswer": "Ghast"
-  },
-  {
-    "question": "Qual bloco permite guardar itens?",
-    "options": ["Fornalha", "Baú", "Bancada de Trabalho", "Bigorna"],
-    "correctAnswer": "Baú"
-  },
-  {
-    "question": "Qual item é necessário para criar uma tocha?",
-    "options": ["Carvão", "Diamante", "Ferro", "Redstone"],
-    "correctAnswer": "Carvão"
-  },
-  {
-    "question": "Qual mob pode ser encontrado naturalmente em uma vila?",
-    "options": ["Villager", "Ghast", "Blaze", "Shulker"],
-    "correctAnswer": "Villager"
-  },
-  {
-    "question": "Qual ferramenta é usada para cortar madeira com mais eficiência?",
-    "options": ["Picareta", "Pá", "Machado", "Enxada"],
-    "correctAnswer": "Machado"
-  },
-  {
-    "question": "Qual item permite ao jogador dormir e definir seu ponto de renascimento?",
-    "options": ["Baú", "Cama", "Fornalha", "Bancada de Trabalho"],
-    "correctAnswer": "Cama"
-  },
-  {
-    "question": "Qual mob pode teleportar e carregar blocos?",
-    "options": ["Enderman", "Creeper", "Skeleton", "Spider"],
-    "correctAnswer": "Enderman"
-  },
-  {
-    "question": "Qual minério é utilizado para fabricar ferramentas e armaduras de ferro?",
-    "options": ["Carvão", "Minério de Ferro", "Redstone", "Lápis-Lazúli"],
-    "correctAnswer": "Minério de Ferro"
-  },
-  {
-    "question": "Qual estrutura contém o portal para The End?",
-    "options": ["Fortaleza do Nether", "Mansão da Floresta", "Stronghold", "Monumento Oceânico"],
+    "question": "Qual destas estruturas é necessária para encontrar o portal que leva ao The End?",
+    "options": [
+      "Fortaleza do Nether",
+      "Stronghold",
+      "Monumento Oceânico",
+      "Mansão da Floresta"
+    ],
     "correctAnswer": "Stronghold"
   },
   {
-    "question": "Qual item é usado para ativar o portal para The End?",
-    "options": ["Olho de Ender", "Pérola do Ender", "Cristal do End", "Estrela do Nether"],
-    "correctAnswer": "Olho de Ender"
+    "question": "Qual mob pode pegar determinados blocos do ambiente e teleportar-se para outras posições?",
+    "options": [
+      "Enderman",
+      "Shulker",
+      "Witch",
+      "Vindicator"
+    ],
+    "correctAnswer": "Enderman"
   },
   {
-    "question": "Qual mob hostil pode aparecer dentro de uma caverna e atirar flechas?",
-    "options": ["Skeleton", "Cow", "Pig", "Villager"],
-    "correctAnswer": "Skeleton"
+    "question": "Um jogador quer obter obsidiana para construir um portal. Qual ferramenta é necessária para quebrá-la e obter o bloco?",
+    "options": [
+      "Picareta de ferro ou superior",
+      "Picareta de pedra",
+      "Machado de diamante",
+      "Qualquer picareta"
+    ],
+    "correctAnswer": "Picareta de ferro ou superior"
   },
   {
-    "question": "Qual material é necessário para fabricar uma picareta de diamante?",
-    "options": ["3 diamantes e 2 gravetos", "2 diamantes e 3 gravetos", "3 ferros e 2 gravetos", "4 diamantes e 2 gravetos"],
-    "correctAnswer": "3 diamantes e 2 gravetos"
+    "question": "Qual destas combinações representa corretamente uma receita de espada de diamante?",
+    "options": [
+      "2 diamantes e 1 graveto",
+      "3 diamantes e 2 gravetos",
+      "2 ferros e 1 graveto",
+      "1 diamante e 2 gravetos"
+    ],
+    "correctAnswer": "2 diamantes e 1 graveto"
+  },
+  {
+    "question": "Um jogador encontra uma Fortaleza do Nether. Qual destes itens ele pode encontrar nessa estrutura e utilizar na preparação para chegar ao The End?",
+    "options": [
+      "Vara de Blaze",
+      "Olho de Ender",
+      "Cristal do End",
+      "Fragmento de Netherite"
+    ],
+    "correctAnswer": "Vara de Blaze"
+  },
+  {
+    "question": "Qual combinação de itens é necessária para fabricar um Olho de Ender?",
+    "options": [
+      "Pérola do Ender e pó de Blaze",
+      "Pérola do Ender e redstone",
+      "Cristal do End e pó de Blaze",
+      "Pérola do Ender e quartzo"
+    ],
+    "correctAnswer": "Pérola do Ender e pó de Blaze"
+  },
+  {
+    "question": "Qual destes mobs é encontrado normalmente no Nether e é capaz de voar e lançar ataques à distância?",
+    "options": [
+      "Ghast",
+      "Blaze",
+      "Phantom",
+      "Vex"
+    ],
+    "correctAnswer": "Ghast"
+  },
+  {
+    "question": "Qual destes itens NÃO é necessário para fabricar uma mesa de encantamentos?",
+    "options": [
+      "Diamante",
+      "Obsidiana",
+      "Livro",
+      "Ferro"
+    ],
+    "correctAnswer": "Ferro"
+  },
+  {
+    "question": "Um jogador quer aumentar a eficiência de uma picareta ao minerar blocos. Qual encantamento é diretamente relacionado a essa função?",
+    "options": [
+      "Eficiência",
+      "Fortuna",
+      "Toque Suave",
+      "Proteção"
+    ],
+    "correctAnswer": "Eficiência"
+  },
+  {
+    "question": "Qual é a principal diferença entre Fortuna e Toque Suave em uma ferramenta?",
+    "options": [
+      "Fortuna pode aumentar certos drops, enquanto Toque Suave permite obter o próprio bloco",
+      "Fortuna aumenta a durabilidade, enquanto Toque Suave aumenta o dano",
+      "Fortuna permite encantar armaduras, enquanto Toque Suave encanta armas",
+      "Fortuna funciona apenas no Nether, enquanto Toque Suave funciona apenas no Overworld"
+    ],
+    "correctAnswer": "Fortuna pode aumentar certos drops, enquanto Toque Suave permite obter o próprio bloco"
+  },
+  {
+    "question": "Qual mob pode ser transformado em uma fonte de alimento e também fornecer couro ao ser derrotado?",
+    "options": [
+      "Vaca",
+      "Ovelha",
+      "Cavalo",
+      "Porco"
+    ],
+    "correctAnswer": "Vaca"
+  },
+  {
+    "question": "Qual destas opções apresenta corretamente os materiais necessários para fabricar uma mesa de encantamentos?",
+    "options": [
+      "4 obsidianas, 2 diamantes e 1 livro",
+      "3 obsidianas, 2 diamantes e 1 livro",
+      "4 obsidianas, 1 diamante e 2 livros",
+      "2 obsidianas, 2 diamantes e 2 livros"
+    ],
+    "correctAnswer": "4 obsidianas, 2 diamantes e 1 livro"
+  },
+  {
+    "question": "Por que uma cama pode ser perigosa quando utilizada no Nether?",
+    "options": [
+      "Ela explode quando o jogador tenta dormir",
+      "Ela transforma o jogador em espectador",
+      "Ela cria automaticamente um portal",
+      "Ela impede permanentemente a regeneração"
+    ],
+    "correctAnswer": "Ela explode quando o jogador tenta dormir"
+  },
+  {
+    "question": "Qual item é utilizado para criar um bloco de Netherite a partir de recursos obtidos no Nether?",
+    "options": [
+      "Lingote de Netherite",
+      "Fragmento de Netherite",
+      "Pó de Blaze",
+      "Quartzo do Nether"
+    ],
+    "correctAnswer": "Lingote de Netherite"
+  },
+  {
+    "question": "Qual destas situações permite que um jogador utilize uma poção de força para melhorar diretamente seu combate?",
+    "options": [
+      "Aumentar o dano causado em ataques corpo a corpo",
+      "Aumentar a quantidade de blocos quebrados",
+      "Aumentar a velocidade de crescimento das plantações",
+      "Aumentar a distância de renderização"
+    ],
+    "correctAnswer": "Aumentar o dano causado em ataques corpo a corpo"
+  },
+  {
+    "question": "Qual destas opções descreve corretamente a função de um escudo?",
+    "options": [
+      "Pode bloquear determinados ataques recebidos pelo jogador",
+      "Aumenta permanentemente a vida máxima do jogador",
+      "Permite voar no Overworld",
+      "Impede qualquer tipo de dano"
+    ],
+    "correctAnswer": "Pode bloquear determinados ataques recebidos pelo jogador"
+  },
+  {
+    "question": "Um jogador quer chegar ao The End. Qual sequência representa melhor uma parte essencial da progressão necessária?",
+    "options": [
+      "Encontrar Blaze → obter pó de Blaze → criar Olhos de Ender → localizar a Stronghold",
+      "Encontrar Ghast → obter pólvora → criar Olhos de Ender → localizar uma vila",
+      "Encontrar Enderman → obter diamante → criar Olhos de Ender → localizar uma Fortaleza do Nether",
+      "Encontrar Shulker → obter concha → criar Olhos de Ender → localizar a Stronghold"
+    ],
+    "correctAnswer": "Encontrar Blaze → obter pó de Blaze → criar Olhos de Ender → localizar a Stronghold"
   }
 ]

@@ -1,15 +1,12 @@
 {
   "cli": {
-    "version": ">= 22.0.0",
+    "version": ">= 22.2.0",
     "appVersionSource": "remote"
   },
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal",
-      "android": {
-        "package": "com.aninhaazsk.quizapp"
-      }
+      "distribution": "internal"
     },
     "preview": {
       "distribution": "internal"

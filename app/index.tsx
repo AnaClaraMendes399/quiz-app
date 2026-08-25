@@ -35,6 +35,9 @@ export default function HomePage() {
 
   const [score, setScore] = useState(0);
 
+  // Quantidade de vidas
+  const [lives, setLives] = useState(3);
+
   // Controla se o quiz terminou
   const [isQuizFinished, setIsQuizFinished] = useState(false);
 
@@ -61,6 +64,9 @@ export default function HomePage() {
     // Zera pontuação
     setScore(0);
 
+    // Começa cada partida com 3 vidas
+    setLives(3);
+
     // Limpa resposta
     setSelectedOption(null);
 
@@ -75,29 +81,7 @@ export default function HomePage() {
   };
 
   // =========================================================
-  // RESPONDER QUESTÃO
-  // =========================================================
-
-  const handleOptionPress = (option: string) => {
-    // Impede selecionar mais de uma alternativa
-    if (isOptionsDisabled) {
-      return;
-    }
-
-    // Verifica se acertou
-    if (option === currentQuestion.correctAnswer) {
-      setScore((prevScore) => prevScore + 1);
-    }
-
-    // Guarda a alternativa escolhida
-    setSelectedOption(option);
-
-    // Bloqueia as alternativas
-    setIsOptionsDisabled(true);
-  };
-
-  // =========================================================
-  // PRÓXIMA PERGUNTA
+  // IR PARA PRÓXIMA PERGUNTA
   // =========================================================
 
   const handleNextQuestion = () => {
@@ -114,6 +98,66 @@ export default function HomePage() {
       // As 10 perguntas terminaram
       setIsQuizFinished(true);
     }
+  };
+
+  // =========================================================
+  // RESPONDER QUESTÃO
+  // =========================================================
+
+  const handleOptionPress = (option: string) => {
+    // Impede clicar em outra alternativa enquanto a resposta
+    // está sendo mostrada
+    if (isOptionsDisabled) {
+      return;
+    }
+
+    const isCorrect = option === currentQuestion.correctAnswer;
+
+    // Mostra a alternativa escolhida
+    setSelectedOption(option);
+
+    // Bloqueia todas as alternativas
+    setIsOptionsDisabled(true);
+
+    // =======================================================
+    // RESPOSTA CORRETA
+    // =======================================================
+
+    if (isCorrect) {
+      setScore((prevScore) => prevScore + 1);
+
+      // Aguarda 700ms para mostrar a resposta verde
+      // e depois passa automaticamente
+      setTimeout(() => {
+        handleNextQuestion();
+      }, 700);
+
+      return;
+    }
+
+    // =======================================================
+    // RESPOSTA ERRADA
+    // =======================================================
+
+    setLives((prevLives) => {
+      const newLives = prevLives - 1;
+
+      // Se acabou as vidas, mostra a resposta por 700ms
+      // e depois vai para o resultado
+      if (newLives === 0) {
+        setTimeout(() => {
+          setIsQuizFinished(true);
+        }, 700);
+      } else {
+        // Ainda possui vidas:
+        // mostra a resposta errada e depois continua
+        setTimeout(() => {
+          handleNextQuestion();
+        }, 700);
+      }
+
+      return newLives;
+    });
   };
 
   // =========================================================
@@ -135,6 +179,9 @@ export default function HomePage() {
 
     // Zera a pontuação
     setScore(0);
+
+    // Recupera as 3 vidas
+    setLives(3);
 
     // Sai da tela de resultado
     setIsQuizFinished(false);
@@ -175,10 +222,10 @@ export default function HomePage() {
       currentQuestionIndex={currentQuestionIndex}
       totalQuestions={quizQuestions.length}
       score={score}
+      lives={lives}
       selectedOption={selectedOption}
       isOptionsDisabled={isOptionsDisabled}
       onOptionPress={handleOptionPress}
-      onNextQuestion={handleNextQuestion}
     />
   );
 }

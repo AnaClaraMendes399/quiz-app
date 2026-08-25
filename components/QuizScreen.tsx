@@ -4,17 +4,13 @@ import {
   View,
   TouchableOpacity,
   ImageBackground,
-  ScrollView,
   Image,
   useWindowDimensions,
 } from 'react-native';
 
 import background from '../assets/teladefundo.jpg';
 import logo from '../assets/logo.png';
-
-// =========================================================
-// TIPO DA PERGUNTA
-// =========================================================
+import heart from '../assets/coração.png';
 
 type Question = {
   question: string;
@@ -22,55 +18,49 @@ type Question = {
   correctAnswer: string;
 };
 
-// =========================================================
-// PROPS DO QUIZSCREEN
-// =========================================================
-
 type QuizScreenProps = {
   currentQuestion: Question;
   currentQuestionIndex: number;
   totalQuestions: number;
   score: number;
+  lives: number;
   selectedOption: string | null;
   isOptionsDisabled: boolean;
   onOptionPress: (option: string) => void;
-  onNextQuestion: () => void;
 };
-
-// =========================================================
-// COMPONENTE
-// =========================================================
 
 export default function QuizScreen({
   currentQuestion,
   currentQuestionIndex,
   totalQuestions,
   score,
+  lives,
   selectedOption,
   isOptionsDisabled,
   onOptionPress,
-  onNextQuestion,
 }: QuizScreenProps) {
   const { width, height } = useWindowDimensions();
 
   const isMobile = width < 600;
+  const isSmallMobile = width < 380;
 
-  // =========================================================
-  // LARGURA DO QUIZ
-  // =========================================================
-
-  const contentWidth = isMobile
-    ? '100%'
+  const cardWidth = isMobile
+    ? '94%'
     : width >= 1200
-    ? 760
-    : width * 0.90;
+      ? 760
+      : '82%';
 
-  const questionSize = isMobile ? 18 : 22;
-  const optionSize = isMobile ? 16 : 18;
+  const questionFontSize = isSmallMobile
+    ? 16
+    : isMobile
+      ? 18
+      : 21;
 
-  // =========================================================
-  // PROGRESSO
-  // =========================================================
+  const optionFontSize = isSmallMobile
+    ? 13
+    : isMobile
+      ? 15
+      : 17;
 
   const progress =
     ((currentQuestionIndex + 1) / totalQuestions) * 100;
@@ -80,25 +70,27 @@ export default function QuizScreen({
   // =========================================================
 
   const getOptionStyle = (option: string) => {
-    if (selectedOption) {
-      const isCorrect =
-        option === currentQuestion.correctAnswer;
-
-      if (isCorrect) {
-        return styles.correctOption;
-      }
-
-      if (option === selectedOption && !isCorrect) {
-        return styles.incorrectOption;
-      }
+    // Antes de responder
+    if (!isOptionsDisabled) {
+      return styles.optionButton;
     }
 
-    return {};
-  };
+    // Resposta correta
+    if (option === currentQuestion.correctAnswer) {
+      return styles.correctOption;
+    }
 
-  // =========================================================
-  // TELA DO QUIZ
-  // =========================================================
+    // Resposta escolhida e errada
+    if (
+      option === selectedOption &&
+      option !== currentQuestion.correctAnswer
+    ) {
+      return styles.wrongOption;
+    }
+
+    // Outras alternativas depois da resposta
+    return styles.optionButtonDisabled;
+  };
 
   return (
     <ImageBackground
@@ -106,227 +98,208 @@ export default function QuizScreen({
       style={styles.container}
       resizeMode="cover"
     >
-      <View style={styles.darkOverlay}>
+      <View style={styles.overlay}>
 
-        <ScrollView
-          contentContainerStyle={[
-            styles.scrollContainer,
+        {/* =================================================
+            CARD PRINCIPAL
+        ================================================= */}
+
+        <View
+          style={[
+            styles.card,
             {
-              minHeight: height,
+              width: cardWidth,
+              paddingHorizontal: isMobile ? 18 : 38,
+              paddingVertical: isMobile ? 18 : 28,
+              maxHeight: height > 700 ? '94%' : '98%',
             },
           ]}
-          showsVerticalScrollIndicator={false}
         >
 
-          <View
-            style={[
-              styles.content,
-              {
-                width: contentWidth,
-              },
-            ]}
-          >
+          {/* =================================================
+              CANTOS PIXELADOS
+          ================================================= */}
 
-            {/* =================================================
-                LOGO
-            ================================================= */}
+          <View style={styles.cornerTopLeft} />
+          <View style={styles.cornerTopRight} />
+          <View style={styles.cornerBottomLeft} />
+          <View style={styles.cornerBottomRight} />
 
-            <View style={styles.header}>
-              <Image
-                source={logo}
-                style={[
-                  styles.logoImage,
-                  {
-                    height: isMobile ? 80 : 125,
-                  },
-                ]}
-                resizeMode="contain"
-              />
-            </View>
+          {/* =================================================
+              CABEÇALHO
+          ================================================= */}
 
-            {/* =================================================
-                PLACAR
-            ================================================= */}
+          <View style={styles.header}>
 
-            <View style={styles.scoreContainer}>
+            <Text
+              style={[
+                styles.questionCounter,
+                {
+                  fontSize: isMobile ? 12 : 14,
+                },
+              ]}
+            >
+              PERGUNTA {currentQuestionIndex + 1} / {totalQuestions}
+            </Text>
 
-              <View style={styles.scorePixelLeft} />
-
-              <Text style={styles.scoreText}>
-                PONTUAÇÃO: {score}
-              </Text>
-
-              <View style={styles.scorePixelRight} />
-
-            </View>
-
-            {/* =================================================
-                PROGRESSO
-            ================================================= */}
-
-            <View style={styles.progressSection}>
-
-              <View style={styles.progressInfo}>
-
-                <Text style={styles.progressText}>
-                  PERGUNTA {currentQuestionIndex + 1}
-                </Text>
-
-                <Text style={styles.progressText}>
-                  {totalQuestions}
-                </Text>
-
-              </View>
-
-              <View style={styles.progressBackground}>
-
-                <View
-                  style={[
-                    styles.progressBar,
-                    {
-                      width: `${progress}%`,
-                    },
-                  ]}
-                />
-
-              </View>
-
-            </View>
-
-            {/* =================================================
-                PERGUNTA
-            ================================================= */}
-
-            <View style={styles.questionCard}>
-
-              {/* CANTOS PIXELADOS */}
-
-              <View style={styles.questionPixelTopLeft} />
-
-              <View style={styles.questionPixelTopRight} />
-
-              <View style={styles.questionPixelBottomLeft} />
-
-              <View style={styles.questionPixelBottomRight} />
-
-              <View style={styles.questionTop}>
-
-                <Text style={styles.questionTag}>
-            
-                </Text>
-
-              </View>
-
-              <Text
-                style={[
-                  styles.questionText,
-                  {
-                    fontSize: questionSize,
-                    lineHeight: isMobile ? 25 : 30,
-                  },
-                ]}
-              >
-                {currentQuestion.question}
-              </Text>
-
-            </View>
-
-            {/* =================================================
-                RESPOSTAS
-            ================================================= */}
-
-            <View style={styles.answers}>
-
-              {currentQuestion.options.map(
-                (option, index) => (
-
-                  <TouchableOpacity
-                    key={index}
-                    style={[
-                      styles.answer,
-                      getOptionStyle(option),
-                    ]}
-                    onPress={() =>
-                      onOptionPress(option)
-                    }
-                    disabled={isOptionsDisabled}
-                    activeOpacity={0.75}
-                  >
-
-                    {/* BLOCO DA LETRA */}
-
-                    <View style={styles.answerNumber}>
-
-                      <Text style={styles.answerNumberText}>
-                        {String.fromCharCode(65 + index)}
-                      </Text>
-
-                    </View>
-
-                    {/* TEXTO DA RESPOSTA */}
-
-                    <Text
-                      style={[
-                        styles.answerText,
-                        {
-                          fontSize: optionSize,
-                        },
-                      ]}
-                    >
-                      {option}
-                    </Text>
-
-                  </TouchableOpacity>
-
-                )
-              )}
-
-            </View>
-
-            {/* =================================================
-                PRÓXIMA PERGUNTA
-            ================================================= */}
-
-            {selectedOption && (
-
-              <TouchableOpacity
-                style={styles.nextButton}
-                onPress={onNextQuestion}
-                activeOpacity={0.8}
-              >
-
-                <View style={styles.nextPixelLeft} />
-
-                <Text style={styles.nextButtonText}>
-                  PRÓXIMA PERGUNTA
-                </Text>
-
-                <View style={styles.nextPixelRight} />
-
-              </TouchableOpacity>
-
-            )}
-
-            {/* =================================================
-                RODAPÉ
-            ================================================= */}
-
-            <Text style={styles.footerText}>
-              ESCOLHA UMA ALTERNATIVA PARA CONTINUAR
+            <Text
+              style={[
+                styles.scoreText,
+                {
+                  fontSize: isMobile ? 12 : 14,
+                },
+              ]}
+            >
+              PONTOS: {score}
             </Text>
 
           </View>
 
-        </ScrollView>
+          {/* =================================================
+              LOGO
+          ================================================= */}
+
+          <Image
+            source={logo}
+            style={[
+              styles.logo,
+              {
+                height: isMobile ? 70 : 95,
+              },
+            ]}
+            resizeMode="contain"
+          />
+
+          {/* =================================================
+              VIDAS
+          ================================================= */}
+
+          <View style={styles.livesContainer}>
+
+            <Text
+              style={[
+                styles.livesLabel,
+                {
+                  fontSize: isMobile ? 11 : 13,
+                },
+              ]}
+            >
+              VIDAS
+            </Text>
+
+            <View style={styles.heartsContainer}>
+
+              {Array.from({ length: 3 }).map((_, index) => (
+                <Image
+                  key={index}
+                  source={heart}
+                  style={[
+                    styles.heartImage,
+                    index >= lives && styles.heartLost,
+                  ]}
+                  resizeMode="contain"
+                />
+              ))}
+
+            </View>
+
+          </View>
+
+          {/* =================================================
+              BARRA DE PROGRESSO
+          ================================================= */}
+
+          <View style={styles.progressBackground}>
+
+            <View
+              style={[
+                styles.progress,
+                {
+                  width: `${progress}%`,
+                },
+              ]}
+            />
+
+          </View>
+
+          {/* =================================================
+              PERGUNTA
+          ================================================= */}
+
+          <View
+            style={[
+              styles.questionBox,
+              {
+                paddingHorizontal: isMobile ? 14 : 22,
+                paddingVertical: isMobile ? 15 : 20,
+              },
+            ]}
+          >
+
+            <Text
+              style={[
+                styles.questionText,
+                {
+                  fontSize: questionFontSize,
+                  lineHeight: isMobile ? 23 : 29,
+                },
+              ]}
+            >
+              {currentQuestion.question}
+            </Text>
+
+          </View>
+
+          {/* =================================================
+              ALTERNATIVAS
+          ================================================= */}
+
+          <View style={styles.optionsContainer}>
+
+            {currentQuestion.options.map((option, index) => (
+              <TouchableOpacity
+                key={index}
+                style={[
+                  getOptionStyle(option),
+                  {
+                    minHeight: isMobile ? 50 : 58,
+                  },
+                ]}
+                onPress={() => onOptionPress(option)}
+                disabled={isOptionsDisabled}
+                activeOpacity={0.8}
+              >
+
+                {/* Pixel esquerdo */}
+                <View style={styles.optionPixelLeft} />
+
+                {/* Pixel direito */}
+                <View style={styles.optionPixelRight} />
+
+                <Text
+                  style={[
+                    styles.optionText,
+                    {
+                      fontSize: optionFontSize,
+                      lineHeight: isMobile ? 19 : 22,
+                    },
+                  ]}
+                >
+                  {option}
+                </Text>
+
+              </TouchableOpacity>
+            ))}
+
+          </View>
+
+
+        </View>
 
       </View>
     </ImageBackground>
   );
 }
-
-// =========================================================
-// ESTILOS
-// =========================================================
 
 const styles = StyleSheet.create({
 
@@ -340,231 +313,54 @@ const styles = StyleSheet.create({
     height: '100%',
   },
 
-  darkOverlay: {
+  overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.45)',
-    alignItems: 'center',
-  },
 
-  scrollContainer: {
-    flexGrow: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.55)',
+
     justifyContent: 'center',
     alignItems: 'center',
 
-    paddingVertical: 30,
-    paddingHorizontal: 20,
-  },
-
-  content: {
-    alignSelf: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 12,
   },
 
   // =========================================================
-  // LOGO
+  // CARD
   // =========================================================
 
-  header: {
+  card: {
+    backgroundColor: '#242424',
+
+    borderWidth: 5,
+    borderColor: '#5C8F32',
+
     alignItems: 'center',
-    marginBottom: 10,
-  },
-
-  logoImage: {
-    width: '100%',
-    alignSelf: 'center',
-  },
-
-  // =========================================================
-  // PLACAR
-  // =========================================================
-
-  scoreContainer: {
-    minHeight: 42,
-
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-
-    backgroundColor: '#171717',
-
-    borderWidth: 3,
-    borderColor: '#3A2112',
-    borderRadius: 0,
-
-    marginBottom: 14,
-
-    position: 'relative',
-  },
-
-  scoreText: {
-    color: '#D6A85C',
-
-    fontSize: 16,
-    fontWeight: '900',
-
-    letterSpacing: 2,
-
-    textShadowColor: '#000',
-    textShadowOffset: {
-      width: 2,
-      height: 2,
-    },
-    textShadowRadius: 0,
-  },
-
-  scorePixelLeft: {
-    position: 'absolute',
-
-    left: 0,
-    top: 0,
-
-    width: 8,
-    height: 8,
-
-    backgroundColor: '#69B82E',
-  },
-
-  scorePixelRight: {
-    position: 'absolute',
-
-    right: 0,
-    bottom: 0,
-
-    width: 8,
-    height: 8,
-
-    backgroundColor: '#69B82E',
-  },
-
-  // =========================================================
-  // PROGRESSO
-  // =========================================================
-
-  progressSection: {
-    marginBottom: 16,
-  },
-
-  progressInfo: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-
-    marginBottom: 7,
-  },
-
-  progressText: {
-    color: '#FFFFFF',
-
-    fontSize: 12,
-    fontWeight: '900',
-
-    letterSpacing: 1.5,
-
-    textShadowColor: '#000',
-    textShadowOffset: {
-      width: 2,
-      height: 2,
-    },
-    textShadowRadius: 0,
-  },
-
-  progressBackground: {
-    width: '100%',
-    height: 14,
-
-    backgroundColor: '#171717',
-
-    borderWidth: 3,
-    borderColor: '#3A2112',
-
-    borderRadius: 0,
-
-    overflow: 'hidden',
-  },
-
-  progressBar: {
-    height: '100%',
-
-    backgroundColor: '#69B82E',
-
-    borderRadius: 0,
-  },
-
-  // =========================================================
-  // CARTÃO DA PERGUNTA
-  // =========================================================
-
-  questionCard: {
-    width: '100%',
-
-    backgroundColor: '#5B3A1C',
-
-    borderWidth: 4,
-    borderColor: '#2B180C',
-
-    borderRadius: 0,
-
-    paddingHorizontal: 22,
-    paddingVertical: 22,
-
-    marginBottom: 16,
 
     position: 'relative',
 
     shadowColor: '#000',
+
     shadowOffset: {
-      width: 6,
-      height: 6,
+      width: 8,
+      height: 8,
     },
+
     shadowOpacity: 1,
     shadowRadius: 0,
 
     elevation: 0,
-  },
-
-  questionTop: {
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-
-  questionTag: {
-    color: '#D6A85C',
-
-    fontSize: 12,
-    fontWeight: '900',
-
-    letterSpacing: 3,
-
-    textShadowColor: '#000',
-    textShadowOffset: {
-      width: 2,
-      height: 2,
-    },
-    textShadowRadius: 0,
-  },
-
-  questionText: {
-    color: '#FFFFFF',
-
-    textAlign: 'center',
-
-    fontWeight: '900',
-
-    textShadowColor: '#000',
-    textShadowOffset: {
-      width: 2,
-      height: 2,
-    },
-    textShadowRadius: 0,
   },
 
   // =========================================================
   // CANTOS PIXELADOS
   // =========================================================
 
-  questionPixelTopLeft: {
+  cornerTopLeft: {
     position: 'absolute',
 
-    left: -4,
-    top: -4,
+    left: -5,
+    top: -5,
 
     width: 12,
     height: 12,
@@ -572,11 +368,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#69B82E',
   },
 
-  questionPixelTopRight: {
+  cornerTopRight: {
     position: 'absolute',
 
-    right: -4,
-    top: -4,
+    right: -5,
+    top: -5,
 
     width: 12,
     height: 12,
@@ -584,186 +380,369 @@ const styles = StyleSheet.create({
     backgroundColor: '#69B82E',
   },
 
-  questionPixelBottomLeft: {
+  cornerBottomLeft: {
     position: 'absolute',
 
-    left: -4,
-    bottom: -4,
+    left: -5,
+    bottom: -5,
 
     width: 12,
     height: 12,
 
-    backgroundColor: '#D6A85C',
+    backgroundColor: '#69B82E',
   },
 
-  questionPixelBottomRight: {
+  cornerBottomRight: {
     position: 'absolute',
 
-    right: -4,
-    bottom: -4,
+    right: -5,
+    bottom: -5,
 
     width: 12,
     height: 12,
 
-    backgroundColor: '#D6A85C',
+    backgroundColor: '#69B82E',
   },
 
   // =========================================================
-  // RESPOSTAS
+  // CABEÇALHO
   // =========================================================
 
-  answers: {
+  header: {
     width: '100%',
-    gap: 10,
-  },
-
-  answer: {
-    width: '100%',
-    minHeight: 58,
 
     flexDirection: 'row',
-    alignItems: 'center',
 
-    backgroundColor: '#356B1C',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+
+    marginBottom: 2,
+  },
+
+  questionCounter: {
+    color: '#D6A85C',
+
+    fontWeight: '900',
+
+    letterSpacing: 1.3,
+
+    textShadowColor: '#000',
+
+    textShadowOffset: {
+      width: 2,
+      height: 2,
+    },
+
+    textShadowRadius: 0,
+  },
+
+  scoreText: {
+    color: '#69B82E',
+
+    fontWeight: '900',
+
+    letterSpacing: 1.3,
+
+    textShadowColor: '#000',
+
+    textShadowOffset: {
+      width: 2,
+      height: 2,
+    },
+
+    textShadowRadius: 0,
+  },
+
+  // =========================================================
+  // LOGO
+  // =========================================================
+
+  logo: {
+    width: '65%',
+
+    alignSelf: 'center',
+
+    marginBottom: 2,
+  },
+
+  // =========================================================
+  // VIDAS
+  // =========================================================
+
+  livesContainer: {
+    flexDirection: 'row',
+
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    marginTop: 2,
+    marginBottom: 9,
+  },
+
+  livesLabel: {
+    color: '#FFFFFF',
+
+    fontWeight: '900',
+
+    letterSpacing: 1.5,
+
+    marginRight: 5,
+
+    textShadowColor: '#000',
+
+    textShadowOffset: {
+      width: 2,
+      height: 2,
+    },
+
+    textShadowRadius: 0,
+  },
+
+  heartsContainer: {
+    flexDirection: 'row',
+
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  heartImage: {
+    width: 48,
+    height: 48,
+
+    marginHorizontal: -2,
+  },
+
+  heartLost: {
+    opacity: 0.22,
+  },
+
+  // =========================================================
+  // BARRA DE PROGRESSO
+  // =========================================================
+
+  progressBackground: {
+    width: '100%',
+
+    height: 11,
+
+    backgroundColor: '#151515',
+
+    borderWidth: 2,
+    borderColor: '#384A2B',
+
+    marginBottom: 15,
+
+    overflow: 'hidden',
+  },
+
+  progress: {
+    height: '100%',
+
+    backgroundColor: '#69B82E',
+  },
+
+  // =========================================================
+  // PERGUNTA
+  // =========================================================
+
+  questionBox: {
+    width: '100%',
+
+    backgroundColor: '#5B4630',
 
     borderWidth: 4,
-    borderColor: '#1E4210',
+    borderColor: '#302418',
 
-    borderRadius: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
 
-    paddingHorizontal: 12,
-
-    position: 'relative',
+    marginBottom: 14,
 
     shadowColor: '#000',
+
     shadowOffset: {
       width: 5,
       height: 5,
     },
+
     shadowOpacity: 1,
     shadowRadius: 0,
 
     elevation: 0,
-  },
-
-  answerNumber: {
-    width: 36,
-    height: 36,
-
-    alignItems: 'center',
-    justifyContent: 'center',
-
-    backgroundColor: '#1E4210',
-
-    borderWidth: 2,
-    borderColor: '#142C0B',
-
-    borderRadius: 0,
-
-    marginRight: 12,
-  },
-
-  answerNumberText: {
-    color: '#FFFFFF',
-
-    fontSize: 16,
-    fontWeight: '900',
-
-    textShadowColor: '#000',
-    textShadowOffset: {
-      width: 2,
-      height: 2,
-    },
-    textShadowRadius: 0,
-  },
-
-  answerText: {
-    flex: 1,
-
-    color: '#FFFFFF',
-
-    fontWeight: '800',
-
-    textAlign: 'left',
-
-    textShadowColor: '#000',
-    textShadowOffset: {
-      width: 1,
-      height: 1,
-    },
-    textShadowRadius: 0,
-  },
-
-  // =========================================================
-  // BOTÃO PRÓXIMA PERGUNTA
-  // =========================================================
-
-  nextButton: {
-    backgroundColor: '#4A8F24',
-
-    minHeight: 58,
-
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-
-    borderWidth: 4,
-    borderColor: '#244D15',
-
-    borderRadius: 0,
-
-    marginTop: 18,
-
-    alignItems: 'center',
-    justifyContent: 'center',
 
     position: 'relative',
-
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 6,
-      height: 6,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 0,
-
-    elevation: 0,
   },
 
-  nextButtonText: {
+  questionText: {
     color: '#FFFFFF',
 
-    fontSize: 17,
     fontWeight: '900',
 
     textAlign: 'center',
 
-    letterSpacing: 1.5,
+    letterSpacing: 0.7,
 
     textShadowColor: '#000',
+
     textShadowOffset: {
       width: 2,
       height: 2,
     },
+
     textShadowRadius: 0,
   },
 
-  nextPixelLeft: {
+  // =========================================================
+  // ALTERNATIVAS
+  // =========================================================
+
+  optionsContainer: {
+    width: '100%',
+  },
+
+  optionButton: {
+    width: '100%',
+
+    backgroundColor: '#4A4A4A',
+
+    borderWidth: 4,
+    borderColor: '#292929',
+
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    paddingHorizontal: 25,
+
+    marginBottom: 9,
+
+    position: 'relative',
+
+    shadowColor: '#000',
+
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+
+    shadowOpacity: 1,
+    shadowRadius: 0,
+
+    elevation: 0,
+  },
+
+  // =========================================================
+  // RESPOSTA CORRETA
+  // =========================================================
+
+  correctOption: {
+    width: '100%',
+
+    backgroundColor: '#4F8F24',
+
+    borderWidth: 4,
+    borderColor: '#315817',
+
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    paddingHorizontal: 25,
+
+    marginBottom: 9,
+
+    position: 'relative',
+
+    shadowColor: '#000',
+
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+
+    shadowOpacity: 1,
+    shadowRadius: 0,
+
+    elevation: 0,
+  },
+
+  // =========================================================
+  // RESPOSTA ERRADA
+  // =========================================================
+
+  wrongOption: {
+    width: '100%',
+
+    backgroundColor: '#9E3838',
+
+    borderWidth: 4,
+    borderColor: '#632222',
+
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    paddingHorizontal: 25,
+
+    marginBottom: 9,
+
+    position: 'relative',
+
+    shadowColor: '#000',
+
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+
+    shadowOpacity: 1,
+    shadowRadius: 0,
+
+    elevation: 0,
+  },
+
+  // =========================================================
+  // ALTERNATIVAS APÓS RESPONDER
+  // =========================================================
+
+  optionButtonDisabled: {
+    width: '100%',
+
+    backgroundColor: '#3A3A3A',
+
+    borderWidth: 4,
+    borderColor: '#282828',
+
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    paddingHorizontal: 25,
+
+    marginBottom: 9,
+
+    position: 'relative',
+
+    opacity: 0.6,
+  },
+
+  // =========================================================
+  // PIXELS DAS ALTERNATIVAS
+  // =========================================================
+
+  optionPixelLeft: {
     position: 'absolute',
 
-    left: 5,
-    top: 5,
+    left: 8,
+    top: 8,
 
     width: 7,
     height: 7,
 
-    backgroundColor: '#69B82E',
+    backgroundColor: '#7A7A7A',
   },
 
-  nextPixelRight: {
+  optionPixelRight: {
     position: 'absolute',
 
-    right: 5,
-    bottom: 5,
+    right: 8,
+    bottom: 8,
 
     width: 7,
     height: 7,
@@ -772,42 +751,56 @@ const styles = StyleSheet.create({
   },
 
   // =========================================================
-  // RODAPÉ
+  // TEXTO DAS ALTERNATIVAS
   // =========================================================
 
-  footerText: {
-    color: 'rgba(255,255,255,0.75)',
+  optionText: {
+    color: '#FFFFFF',
+
+    fontWeight: '900',
 
     textAlign: 'center',
 
-    fontSize: 11,
-
-    marginTop: 20,
-
-    fontWeight: '800',
-
-    letterSpacing: 1,
+    letterSpacing: 0.6,
 
     textShadowColor: '#000',
+
     textShadowOffset: {
-      width: 1,
-      height: 1,
+      width: 2,
+      height: 2,
     },
+
     textShadowRadius: 0,
   },
 
   // =========================================================
-  // RESPOSTAS CORRETAS / INCORRETAS
+  // DIVISÓRIA FINAL
   // =========================================================
 
-  correctOption: {
-    borderColor: '#A4E66A',
-    backgroundColor: '#4C9A25',
+  dividerBottom: {
+    flexDirection: 'row',
+
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    height: 8,
   },
 
-  incorrectOption: {
-    borderColor: '#FF8A80',
-    backgroundColor: '#A83228',
+  dividerBlockLarge: {
+    width: 25,
+    height: 10,
+
+    backgroundColor: '#69B82E',
+
+    marginHorizontal: 5,
   },
 
+  dividerBlockSmall: {
+    width: 12,
+    height: 10,
+
+    backgroundColor: '#D6A85C',
+
+    marginHorizontal: 5,
+  },
 });
