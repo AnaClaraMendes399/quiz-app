@@ -6,6 +6,7 @@ import {
   ImageBackground,
   Image,
   useWindowDimensions,
+  ScrollView,
 } from 'react-native';
 
 import background from '../assets/teladefundo.jpg';
@@ -101,19 +102,25 @@ export default function QuizScreen({
       <View style={styles.overlay}>
 
         {/* =================================================
-            CARD PRINCIPAL
+            CARD PRINCIPAL COM SCROLL
         ================================================= */}
 
-        <View
+        <ScrollView
           style={[
-            styles.card,
+            styles.cardScroll,
             {
               width: cardWidth,
-              paddingHorizontal: isMobile ? 18 : 38,
-              paddingVertical: isMobile ? 18 : 28,
               maxHeight: height > 700 ? '94%' : '98%',
             },
           ]}
+          contentContainerStyle={[
+            styles.card,
+            {
+              paddingHorizontal: isMobile ? 18 : 38,
+              paddingVertical: isMobile ? 18 : 28,
+            },
+          ]}
+          showsVerticalScrollIndicator={false}
         >
 
           {/* =================================================
@@ -293,8 +300,7 @@ export default function QuizScreen({
 
           </View>
 
-
-        </View>
+        </ScrollView>
 
       </View>
     </ImageBackground>
@@ -326,16 +332,12 @@ const styles = StyleSheet.create({
   },
 
   // =========================================================
-  // CARD
+  // CARD SCROLL CONTAINER
   // =========================================================
 
-  card: {
-    backgroundColor: '#242424',
-
+  cardScroll: {
     borderWidth: 5,
     borderColor: '#5C8F32',
-
-    alignItems: 'center',
 
     position: 'relative',
 
@@ -350,6 +352,16 @@ const styles = StyleSheet.create({
     shadowRadius: 0,
 
     elevation: 0,
+  },
+
+  // =========================================================
+  // CARD
+  // =========================================================
+
+  card: {
+    backgroundColor: '#242424',
+    alignItems: 'center',
+    width: '100%',
   },
 
   // =========================================================
