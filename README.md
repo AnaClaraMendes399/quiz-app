@@ -4,10 +4,11 @@ Quiz interativo sobre o universo de Minecraft, desenvolvido com React Native e E
 
 ---
 
-## Demonstração
+
+### Vídeo de Funcionamento
 
 <p align="center">
-  <img src="./assets/exemplo.jpg" alt="Demonstração do QuizCraft" width="300"/>
+  <video src="assets/exemplo.webm" width="300" controls muted autoplay></video>
 </p>
 
 ---

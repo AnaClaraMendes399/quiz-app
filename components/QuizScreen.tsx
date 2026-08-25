@@ -40,28 +40,28 @@ export default function QuizScreen({
   isOptionsDisabled,
   onOptionPress,
 }: QuizScreenProps) {
-  const { width, height } = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   const isMobile = width < 600;
   const isSmallMobile = width < 380;
 
   const cardWidth = isMobile
-    ? '94%'
+    ? '95%'
     : width >= 1200
       ? 760
       : '82%';
 
   const questionFontSize = isSmallMobile
-    ? 16
+    ? 15
     : isMobile
-      ? 18
+      ? 17
       : 21;
 
-  // Fonte ajustada para caber melhor no celular
+  // Fonte otimizada para o texto longo caber inteiro sem cortar
   const optionFontSize = isSmallMobile
     ? 11
     : isMobile
-      ? 13
+      ? 12
       : 17;
 
   const progress =
@@ -95,25 +95,20 @@ export default function QuizScreen({
     >
       <View style={styles.overlay}>
 
-        {/* =================================================
-            SCROLLVIEW ENVOLVENDO O CARD INTEIRO
-        ================================================= */}
         <ScrollView
-          style={{
-            width: cardWidth,
-            maxHeight: height > 700 ? '94%' : '98%',
-          }}
+          style={[styles.scrollContainer, { width: cardWidth }]}
+          contentContainerStyle={styles.scrollContentContainer}
           showsVerticalScrollIndicator={false}
         >
           {/* =================================================
-              CARD PRINCIPAL
+              CARD PRINCIPAL CENTRALIZADO
           ================================================= */}
           <View
             style={[
               styles.card,
               {
-                paddingHorizontal: isMobile ? 14 : 38,
-                paddingVertical: isMobile ? 18 : 28,
+                paddingHorizontal: isMobile ? 10 : 38,
+                paddingVertical: isMobile ? 16 : 28,
               },
             ]}
           >
@@ -137,7 +132,7 @@ export default function QuizScreen({
             {/* LOGO */}
             <Image
               source={logo}
-              style={[styles.logo, { height: isMobile ? 70 : 95 }]}
+              style={[styles.logo, { height: isMobile ? 65 : 95 }]}
               resizeMode="contain"
             />
 
@@ -171,15 +166,15 @@ export default function QuizScreen({
               style={[
                 styles.questionBox,
                 {
-                  paddingHorizontal: isMobile ? 14 : 22,
-                  paddingVertical: isMobile ? 15 : 20,
+                  paddingHorizontal: isMobile ? 10 : 22,
+                  paddingVertical: isMobile ? 14 : 20,
                 },
               ]}
             >
               <Text
                 style={[
                   styles.questionText,
-                  { fontSize: questionFontSize, lineHeight: isMobile ? 23 : 29 },
+                  { fontSize: questionFontSize, lineHeight: isMobile ? 22 : 29 },
                 ]}
               >
                 {currentQuestion.question}
@@ -193,7 +188,7 @@ export default function QuizScreen({
                   key={index}
                   style={[
                     getOptionStyle(option),
-                    { minHeight: isMobile ? 50 : 58 },
+                    { minHeight: isMobile ? 52 : 58 },
                   ]}
                   onPress={() => onOptionPress(option)}
                   disabled={isOptionsDisabled}
@@ -204,7 +199,7 @@ export default function QuizScreen({
                   <Text
                     style={[
                       styles.optionText,
-                      { fontSize: optionFontSize, lineHeight: isMobile ? 18 : 22 },
+                      { fontSize: optionFontSize, lineHeight: isMobile ? 16 : 22 },
                     ]}
                   >
                     {option}
@@ -223,9 +218,6 @@ export default function QuizScreen({
 
 const styles = StyleSheet.create({
 
-  // =========================================================
-  // GERAL
-  // =========================================================
   container: {
     flex: 1,
     width: '100%',
@@ -237,13 +229,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.55)',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 15,
-    paddingVertical: 12,
+    paddingVertical: 10,
   },
 
-  // =========================================================
-  // CARD 
-  // =========================================================
+  scrollContainer: {
+    flexGrow: 0,
+    maxHeight: '94%',
+  },
+
+  scrollContentContainer: {
+    alignItems: 'center',
+    paddingBottom: 15,
+  },
+
   card: {
     backgroundColor: '#242424',
     borderWidth: 5,
@@ -258,9 +256,6 @@ const styles = StyleSheet.create({
     elevation: 0,
   },
 
-  // =========================================================
-  // CANTOS PIXELADOS
-  // =========================================================
   cornerTopLeft: {
     position: 'absolute',
     left: -5,
@@ -294,9 +289,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#69B82E',
   },
 
-  // =========================================================
-  // CABEÇALHO
-  // =========================================================
   header: {
     width: '100%',
     flexDirection: 'row',
@@ -321,18 +313,12 @@ const styles = StyleSheet.create({
     textShadowRadius: 0,
   },
 
-  // =========================================================
-  // LOGO
-  // =========================================================
   logo: {
     width: '65%',
     alignSelf: 'center',
     marginBottom: 2,
   },
 
-  // =========================================================
-  // VIDAS
-  // =========================================================
   livesContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -363,9 +349,6 @@ const styles = StyleSheet.create({
     opacity: 0.22,
   },
 
-  // =========================================================
-  // BARRA DE PROGRESSO
-  // =========================================================
   progressBackground: {
     width: '100%',
     height: 11,
@@ -380,9 +363,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#69B82E',
   },
 
-  // =========================================================
-  // PERGUNTA
-  // =========================================================
   questionBox: {
     width: '100%',
     backgroundColor: '#5B4630',
@@ -408,9 +388,6 @@ const styles = StyleSheet.create({
     textShadowRadius: 0,
   },
 
-  // =========================================================
-  // ALTERNATIVAS
-  // =========================================================
   optionsContainer: {
     width: '100%',
   },
@@ -421,7 +398,8 @@ const styles = StyleSheet.create({
     borderColor: '#292929',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 12, // <-- Espaçamento reduzido para caber mais texto
+    paddingHorizontal: 8,
+    paddingVertical: 8,
     marginBottom: 9,
     position: 'relative',
     shadowColor: '#000',
@@ -437,7 +415,8 @@ const styles = StyleSheet.create({
     borderColor: '#315817',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 12,
+    paddingHorizontal: 8,
+    paddingVertical: 8,
     marginBottom: 9,
     position: 'relative',
     shadowColor: '#000',
@@ -453,7 +432,8 @@ const styles = StyleSheet.create({
     borderColor: '#632222',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 12,
+    paddingHorizontal: 8,
+    paddingVertical: 8,
     marginBottom: 9,
     position: 'relative',
     shadowColor: '#000',
@@ -469,15 +449,13 @@ const styles = StyleSheet.create({
     borderColor: '#282828',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 12,
+    paddingHorizontal: 8,
+    paddingVertical: 8,
     marginBottom: 9,
     position: 'relative',
     opacity: 0.6,
   },
 
-  // =========================================================
-  // PIXELS E TEXTOS DAS ALTERNATIVAS
-  // =========================================================
   optionPixelLeft: {
     position: 'absolute',
     left: 8,
@@ -498,31 +476,9 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: '900',
     textAlign: 'center',
-    letterSpacing: 0.6,
+    letterSpacing: 0.4,
     textShadowColor: '#000',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 0,
-  },
-
-  // =========================================================
-  // DIVISÓRIAS FINAIS (Mantidas do original)
-  // =========================================================
-  dividerBottom: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 8,
-  },
-  dividerBlockLarge: {
-    width: 25,
-    height: 10,
-    backgroundColor: '#69B82E',
-    marginHorizontal: 5,
-  },
-  dividerBlockSmall: {
-    width: 12,
-    height: 10,
-    backgroundColor: '#D6A85C',
-    marginHorizontal: 5,
   },
 });
