@@ -57,6 +57,7 @@ export default function QuizScreen({
       ? 18
       : 21;
 
+  // Fonte ajustada para caber melhor no celular
   const optionFontSize = isSmallMobile
     ? 11
     : isMobile
@@ -71,25 +72,18 @@ export default function QuizScreen({
   // =========================================================
 
   const getOptionStyle = (option: string) => {
-    // Antes de responder
     if (!isOptionsDisabled) {
       return styles.optionButton;
     }
-
-    // Resposta correta
     if (option === currentQuestion.correctAnswer) {
       return styles.correctOption;
     }
-
-    // Resposta escolhida e errada
     if (
       option === selectedOption &&
       option !== currentQuestion.correctAnswer
     ) {
       return styles.wrongOption;
     }
-
-    // Outras alternativas depois da resposta
     return styles.optionButtonDisabled;
   };
 
@@ -102,204 +96,124 @@ export default function QuizScreen({
       <View style={styles.overlay}>
 
         {/* =================================================
-            CARD PRINCIPAL COM SCROLL
+            SCROLLVIEW ENVOLVENDO O CARD INTEIRO
         ================================================= */}
-
         <ScrollView
-          style={[
-            styles.cardScroll,
-            {
-              width: cardWidth,
-              maxHeight: height > 700 ? '94%' : '98%',
-            },
-          ]}
-          contentContainerStyle={[
-            styles.card,
-            {
-              paddingHorizontal: isMobile ? 18 : 38,
-              paddingVertical: isMobile ? 18 : 28,
-            },
-          ]}
+          style={{
+            width: cardWidth,
+            maxHeight: height > 700 ? '94%' : '98%',
+          }}
           showsVerticalScrollIndicator={false}
         >
-
           {/* =================================================
-              CANTOS PIXELADOS
+              CARD PRINCIPAL
           ================================================= */}
-
-          <View style={styles.cornerTopLeft} />
-          <View style={styles.cornerTopRight} />
-          <View style={styles.cornerBottomLeft} />
-          <View style={styles.cornerBottomRight} />
-
-          {/* =================================================
-              CABEÇALHO
-          ================================================= */}
-
-          <View style={styles.header}>
-
-            <Text
-              style={[
-                styles.questionCounter,
-                {
-                  fontSize: isMobile ? 12 : 14,
-                },
-              ]}
-            >
-              PERGUNTA {currentQuestionIndex + 1} / {totalQuestions}
-            </Text>
-
-            <Text
-              style={[
-                styles.scoreText,
-                {
-                  fontSize: isMobile ? 12 : 14,
-                },
-              ]}
-            >
-              PONTOS: {score}
-            </Text>
-
-          </View>
-
-          {/* =================================================
-              LOGO
-          ================================================= */}
-
-          <Image
-            source={logo}
-            style={[
-              styles.logo,
-              {
-                height: isMobile ? 70 : 95,
-              },
-            ]}
-            resizeMode="contain"
-          />
-
-          {/* =================================================
-              VIDAS
-          ================================================= */}
-
-          <View style={styles.livesContainer}>
-
-            <Text
-              style={[
-                styles.livesLabel,
-                {
-                  fontSize: isMobile ? 11 : 13,
-                },
-              ]}
-            >
-              VIDAS
-            </Text>
-
-            <View style={styles.heartsContainer}>
-
-              {Array.from({ length: 3 }).map((_, index) => (
-                <Image
-                  key={index}
-                  source={heart}
-                  style={[
-                    styles.heartImage,
-                    index >= lives && styles.heartLost,
-                  ]}
-                  resizeMode="contain"
-                />
-              ))}
-
-            </View>
-
-          </View>
-
-          {/* =================================================
-              BARRA DE PROGRESSO
-          ================================================= */}
-
-          <View style={styles.progressBackground}>
-
-            <View
-              style={[
-                styles.progress,
-                {
-                  width: `${progress}%`,
-                },
-              ]}
-            />
-
-          </View>
-
-          {/* =================================================
-              PERGUNTA
-          ================================================= */}
-
           <View
             style={[
-              styles.questionBox,
+              styles.card,
               {
-                paddingHorizontal: isMobile ? 14 : 22,
-                paddingVertical: isMobile ? 15 : 20,
+                paddingHorizontal: isMobile ? 14 : 38,
+                paddingVertical: isMobile ? 18 : 28,
               },
             ]}
           >
 
-            <Text
+            {/* CANTOS PIXELADOS */}
+            <View style={styles.cornerTopLeft} />
+            <View style={styles.cornerTopRight} />
+            <View style={styles.cornerBottomLeft} />
+            <View style={styles.cornerBottomRight} />
+
+            {/* CABEÇALHO */}
+            <View style={styles.header}>
+              <Text style={[styles.questionCounter, { fontSize: isMobile ? 12 : 14 }]}>
+                PERGUNTA {currentQuestionIndex + 1} / {totalQuestions}
+              </Text>
+              <Text style={[styles.scoreText, { fontSize: isMobile ? 12 : 14 }]}>
+                PONTOS: {score}
+              </Text>
+            </View>
+
+            {/* LOGO */}
+            <Image
+              source={logo}
+              style={[styles.logo, { height: isMobile ? 70 : 95 }]}
+              resizeMode="contain"
+            />
+
+            {/* VIDAS */}
+            <View style={styles.livesContainer}>
+              <Text style={[styles.livesLabel, { fontSize: isMobile ? 11 : 13 }]}>
+                VIDAS
+              </Text>
+              <View style={styles.heartsContainer}>
+                {Array.from({ length: 3 }).map((_, index) => (
+                  <Image
+                    key={index}
+                    source={heart}
+                    style={[
+                      styles.heartImage,
+                      index >= lives && styles.heartLost,
+                    ]}
+                    resizeMode="contain"
+                  />
+                ))}
+              </View>
+            </View>
+
+            {/* BARRA DE PROGRESSO */}
+            <View style={styles.progressBackground}>
+              <View style={[styles.progress, { width: `${progress}%` }]} />
+            </View>
+
+            {/* PERGUNTA */}
+            <View
               style={[
-                styles.questionText,
+                styles.questionBox,
                 {
-                  fontSize: questionFontSize,
-                  lineHeight: isMobile ? 23 : 29,
+                  paddingHorizontal: isMobile ? 14 : 22,
+                  paddingVertical: isMobile ? 15 : 20,
                 },
               ]}
             >
-              {currentQuestion.question}
-            </Text>
-
-          </View>
-
-          {/* =================================================
-              ALTERNATIVAS
-          ================================================= */}
-
-          <View style={styles.optionsContainer}>
-
-            {currentQuestion.options.map((option, index) => (
-              <TouchableOpacity
-                key={index}
+              <Text
                 style={[
-                  getOptionStyle(option),
-                  {
-                    minHeight: isMobile ? 50 : 58,
-                  },
+                  styles.questionText,
+                  { fontSize: questionFontSize, lineHeight: isMobile ? 23 : 29 },
                 ]}
-                onPress={() => onOptionPress(option)}
-                disabled={isOptionsDisabled}
-                activeOpacity={0.8}
               >
+                {currentQuestion.question}
+              </Text>
+            </View>
 
-                {/* Pixel esquerdo */}
-                <View style={styles.optionPixelLeft} />
-
-                {/* Pixel direito */}
-                <View style={styles.optionPixelRight} />
-
-                <Text
+            {/* ALTERNATIVAS */}
+            <View style={styles.optionsContainer}>
+              {currentQuestion.options.map((option, index) => (
+                <TouchableOpacity
+                  key={index}
                   style={[
-                    styles.optionText,
-                    {
-                      fontSize: optionFontSize,
-                      lineHeight: isMobile ? 18 : 22,
-                    },
+                    getOptionStyle(option),
+                    { minHeight: isMobile ? 50 : 58 },
                   ]}
+                  onPress={() => onOptionPress(option)}
+                  disabled={isOptionsDisabled}
+                  activeOpacity={0.8}
                 >
-                  {option}
-                </Text>
-
-              </TouchableOpacity>
-            ))}
+                  <View style={styles.optionPixelLeft} />
+                  <View style={styles.optionPixelRight} />
+                  <Text
+                    style={[
+                      styles.optionText,
+                      { fontSize: optionFontSize, lineHeight: isMobile ? 18 : 22 },
+                    ]}
+                  >
+                    {option}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
 
           </View>
-
         </ScrollView>
 
       </View>
@@ -309,6 +223,9 @@ export default function QuizScreen({
 
 const styles = StyleSheet.create({
 
+  // =========================================================
+  // GERAL
+  // =========================================================
   container: {
     flex: 1,
     width: '100%',
@@ -324,9 +241,15 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
 
-  cardScroll: {
+  // =========================================================
+  // CARD 
+  // =========================================================
+  card: {
+    backgroundColor: '#242424',
     borderWidth: 5,
     borderColor: '#5C8F32',
+    alignItems: 'center',
+    width: '100%',
     position: 'relative',
     shadowColor: '#000',
     shadowOffset: { width: 8, height: 8 },
@@ -335,12 +258,9 @@ const styles = StyleSheet.create({
     elevation: 0,
   },
 
-  card: {
-    backgroundColor: '#242424',
-    alignItems: 'center',
-    width: '100%',
-  },
-
+  // =========================================================
+  // CANTOS PIXELADOS
+  // =========================================================
   cornerTopLeft: {
     position: 'absolute',
     left: -5,
@@ -349,7 +269,6 @@ const styles = StyleSheet.create({
     height: 12,
     backgroundColor: '#69B82E',
   },
-
   cornerTopRight: {
     position: 'absolute',
     right: -5,
@@ -358,7 +277,6 @@ const styles = StyleSheet.create({
     height: 12,
     backgroundColor: '#69B82E',
   },
-
   cornerBottomLeft: {
     position: 'absolute',
     left: -5,
@@ -367,7 +285,6 @@ const styles = StyleSheet.create({
     height: 12,
     backgroundColor: '#69B82E',
   },
-
   cornerBottomRight: {
     position: 'absolute',
     right: -5,
@@ -377,6 +294,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#69B82E',
   },
 
+  // =========================================================
+  // CABEÇALHO
+  // =========================================================
   header: {
     width: '100%',
     flexDirection: 'row',
@@ -384,7 +304,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 2,
   },
-
   questionCounter: {
     color: '#D6A85C',
     fontWeight: '900',
@@ -393,7 +312,6 @@ const styles = StyleSheet.create({
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 0,
   },
-
   scoreText: {
     color: '#69B82E',
     fontWeight: '900',
@@ -403,12 +321,18 @@ const styles = StyleSheet.create({
     textShadowRadius: 0,
   },
 
+  // =========================================================
+  // LOGO
+  // =========================================================
   logo: {
     width: '65%',
     alignSelf: 'center',
     marginBottom: 2,
   },
 
+  // =========================================================
+  // VIDAS
+  // =========================================================
   livesContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -416,7 +340,6 @@ const styles = StyleSheet.create({
     marginTop: 2,
     marginBottom: 9,
   },
-
   livesLabel: {
     color: '#FFFFFF',
     fontWeight: '900',
@@ -426,23 +349,23 @@ const styles = StyleSheet.create({
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 0,
   },
-
   heartsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
-
   heartImage: {
     width: 48,
     height: 48,
     marginHorizontal: -2,
   },
-
   heartLost: {
     opacity: 0.22,
   },
 
+  // =========================================================
+  // BARRA DE PROGRESSO
+  // =========================================================
   progressBackground: {
     width: '100%',
     height: 11,
@@ -452,12 +375,14 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     overflow: 'hidden',
   },
-
   progress: {
     height: '100%',
     backgroundColor: '#69B82E',
   },
 
+  // =========================================================
+  // PERGUNTA
+  // =========================================================
   questionBox: {
     width: '100%',
     backgroundColor: '#5B4630',
@@ -473,7 +398,6 @@ const styles = StyleSheet.create({
     elevation: 0,
     position: 'relative',
   },
-
   questionText: {
     color: '#FFFFFF',
     fontWeight: '900',
@@ -484,10 +408,12 @@ const styles = StyleSheet.create({
     textShadowRadius: 0,
   },
 
+  // =========================================================
+  // ALTERNATIVAS
+  // =========================================================
   optionsContainer: {
     width: '100%',
   },
-
   optionButton: {
     width: '100%',
     backgroundColor: '#4A4A4A',
@@ -495,7 +421,7 @@ const styles = StyleSheet.create({
     borderColor: '#292929',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 12,
+    paddingHorizontal: 12, // <-- Espaçamento reduzido para caber mais texto
     marginBottom: 9,
     position: 'relative',
     shadowColor: '#000',
@@ -504,7 +430,6 @@ const styles = StyleSheet.create({
     shadowRadius: 0,
     elevation: 0,
   },
-
   correctOption: {
     width: '100%',
     backgroundColor: '#4F8F24',
@@ -521,7 +446,6 @@ const styles = StyleSheet.create({
     shadowRadius: 0,
     elevation: 0,
   },
-
   wrongOption: {
     width: '100%',
     backgroundColor: '#9E3838',
@@ -538,7 +462,6 @@ const styles = StyleSheet.create({
     shadowRadius: 0,
     elevation: 0,
   },
-
   optionButtonDisabled: {
     width: '100%',
     backgroundColor: '#3A3A3A',
@@ -552,6 +475,9 @@ const styles = StyleSheet.create({
     opacity: 0.6,
   },
 
+  // =========================================================
+  // PIXELS E TEXTOS DAS ALTERNATIVAS
+  // =========================================================
   optionPixelLeft: {
     position: 'absolute',
     left: 8,
@@ -560,7 +486,6 @@ const styles = StyleSheet.create({
     height: 7,
     backgroundColor: '#7A7A7A',
   },
-
   optionPixelRight: {
     position: 'absolute',
     right: 8,
@@ -569,7 +494,6 @@ const styles = StyleSheet.create({
     height: 7,
     backgroundColor: '#D6A85C',
   },
-
   optionText: {
     color: '#FFFFFF',
     fontWeight: '900',
@@ -578,5 +502,27 @@ const styles = StyleSheet.create({
     textShadowColor: '#000',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 0,
+  },
+
+  // =========================================================
+  // DIVISÓRIAS FINAIS (Mantidas do original)
+  // =========================================================
+  dividerBottom: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 8,
+  },
+  dividerBlockLarge: {
+    width: 25,
+    height: 10,
+    backgroundColor: '#69B82E',
+    marginHorizontal: 5,
+  },
+  dividerBlockSmall: {
+    width: 12,
+    height: 10,
+    backgroundColor: '#D6A85C',
+    marginHorizontal: 5,
   },
 });
